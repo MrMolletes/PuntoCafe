@@ -7,24 +7,24 @@ import './MapSection.css'
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl:       'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl:     'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 })
 
 const cafeIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize:   [25, 41],
+  iconSize: [25, 41],
   iconAnchor: [12, 41],
-  popupAnchor:[1, -34],
+  popupAnchor: [1, -34],
   shadowSize: [41, 41],
 })
 
 const CAFETERIAS_DEMO = [
-  { id:1, nombre:'Café Époque',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Un espacio acogedor dedicado a servir experiencias únicas.', rating:4.8, horario:'9:00 – 19:00', lat:22.2726, lng:-97.8359, foto:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&q=80' },
-  { id:2, nombre:'Zona Café',    ciudad:'Cd Madero, Tamaulipas', descripcion:'Relajate con los mejores granos en un ambiente sin igual.',  rating:4.5, horario:'8:00 – 18:00', lat:22.2698, lng:-97.8330, foto:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=120&q=80' },
-  { id:3, nombre:'Cafe & Moka',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Robusta de altura cremada en la crema más fina.',           rating:4.1, horario:'7:00 – 17:00', lat:22.2748, lng:-97.8380, foto:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&q=80' },
-  { id:4, nombre:'Madero Cafe',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Algo ligero, limón al fondo, caramelo claro al tono.',      rating:4.6, horario:'8:30 – 20:00', lat:22.2710, lng:-97.8345, foto:'https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=120&q=80' },
+  { id: 1, nombre: 'Café Époque', ciudad: 'Cd Madero, Tamaulipas', descripcion: 'Un espacio acogedor dedicado a servir experiencias únicas.', rating: 4.8, horario: '9:00 – 19:00', lat: 22.2726, lng: -97.8359, foto: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&q=80' },
+  { id: 2, nombre: 'Zona Café', ciudad: 'Cd Madero, Tamaulipas', descripcion: 'Relajate con los mejores granos en un ambiente sin igual.', rating: 4.5, horario: '8:00 – 18:00', lat: 22.2698, lng: -97.8330, foto: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=120&q=80' },
+  { id: 3, nombre: 'Cafe & Moka', ciudad: 'Cd Madero, Tamaulipas', descripcion: 'Robusta de altura cremada en la crema más fina.', rating: 4.1, horario: '7:00 – 17:00', lat: 22.2748, lng: -97.8380, foto: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&q=80' },
+  { id: 4, nombre: 'Madero Cafe', ciudad: 'Cd Madero, Tamaulipas', descripcion: 'Algo ligero, limón al fondo, caramelo claro al tono.', rating: 4.6, horario: '8:30 – 20:00', lat: 22.2710, lng: -97.8345, foto: 'https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=120&q=80' },
 ]
 
 function FlyTo({ center }) {
@@ -39,13 +39,13 @@ function Stars({ rating }) {
 }
 
 export default function MapSection() {
-  const [query, setQuery]               = useState('')
-  const [resultados, setResultados]     = useState(CAFETERIAS_DEMO)
+  const [query, setQuery] = useState('')
+  const [resultados, setResultados] = useState(CAFETERIAS_DEMO)
   const [seleccionado, setSeleccionado] = useState(null)
-  const [center, setCenter]             = useState([22.2726, -97.8359])
-  const [localizando, setLocalizando]   = useState(false)
-  const [slideActivo, setSlideActivo]   = useState(0)
-  const markersRef                      = useRef({})
+  const [center, setCenter] = useState([22.2726, -97.8359])
+  const [localizando, setLocalizando] = useState(false)
+  const [slideActivo, setSlideActivo] = useState(0)
+  const markersRef = useRef({})
 
   const MEJORES = [...CAFETERIAS_DEMO].sort((a, b) => b.rating - a.rating)
 
@@ -84,7 +84,7 @@ export default function MapSection() {
           {/* Barra de búsqueda flotante píldora */}
           <form className="ms-search-bar" onSubmit={buscar}>
             <svg className="ms-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
+              <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
             </svg>
             <input type="text" value={query} onChange={e => setQuery(e.target.value)} placeholder="Busca tu cafetería en tu ciudad" className="ms-search-input" />
             <button type="submit" className="ms-search-btn">Buscar</button>
@@ -108,7 +108,7 @@ export default function MapSection() {
 
           <div className="ms-map-btns">
             <button type="button" className="ms-btn-locate" onClick={localizarme} disabled={localizando}>
-              {localizando ? 'Buscando…' : '📍 Localizarme'}
+              {localizando ? 'Buscando…' : 'Localizarme'}
             </button>
             <button type="button" className="ms-btn-secondary">Usar el mapa</button>
           </div>
