@@ -39,13 +39,15 @@ function Stars({ rating }) {
 }
 
 export default function MapSection() {
-  const [query, setQuery]               = useState('')
-  const [resultados, setResultados]     = useState(CAFETERIAS_DEMO)
-  const [seleccionado, setSeleccionado] = useState(null)
-  const [center, setCenter]             = useState([22.2726, -97.8359])
-  const [localizando, setLocalizando]   = useState(false)
-  const [slideActivo, setSlideActivo]   = useState(0)
-  const markersRef                      = useRef({})
+  const [query, setQuery]                   = useState('')
+  const [resultados, setResultados]         = useState(CAFETERIAS_DEMO)
+  const [seleccionado, setSeleccionado]     = useState(null)
+  const [center, setCenter]                 = useState([22.2726, -97.8359])
+  const [localizando, setLocalizando]       = useState(false)
+  const [modalUbicacion, setModalUbicacion] = useState(true)
+  const [permisoDenegado, setPermisoDenegado] = useState(false)
+  const [slideActivo, setSlideActivo]       = useState(0)
+  const markersRef                          = useRef({})
 
   const MEJORES = [...CAFETERIAS_DEMO].sort((a, b) => b.rating - a.rating)
 
@@ -59,9 +61,21 @@ export default function MapSection() {
   const localizarme = () => {
     if (!navigator.geolocation) return
     setLocalizando(true)
+    setModalUbicacion(false)
     navigator.geolocation.getCurrentPosition(
-      (pos) => { setCenter([pos.coords.latitude, pos.coords.longitude]); setLocalizando(false) },
-      () => setLocalizando(false)
+      (pos) => {
+        setCenter([pos.coords.latitude, pos.coords.longitude])
+        setLocalizando(false)
+        setModalUbicacion(false)
+      },
+      (err) => {
+        setLocalizando(false)
+        if (err.code === 1) {
+          setPermisoDenegado(true)
+          setModalUbicacion(true)
+        }
+      },
+      { timeout: 8000, enableHighAccuracy: true }
     )
   }
 
@@ -73,15 +87,20 @@ export default function MapSection() {
 
   return (
     <section className="ms-section generalPad">
+
+      {/* Título */}
       <div className="ms-titulo Maxwidth">
         <h2>Tu camino al <span className="specialColor">buen cafe</span></h2>
         <div className="ms-underline" />
       </div>
 
+      {/* Cuerpo: mapa + sidebar */}
       <div className="ms-body Maxwidth">
+
+        {/* Mapa */}
         <div className="ms-map-container">
 
-          {/* Barra de búsqueda flotante píldora */}
+          {/* Barra de búsqueda flotante */}
           <form className="ms-search-bar" onSubmit={buscar}>
             <svg className="ms-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/>
@@ -90,6 +109,7 @@ export default function MapSection() {
             <button type="submit" className="ms-search-btn">Buscar</button>
           </form>
 
+          {/* Leaflet */}
           <MapContainer center={center} zoom={15} className="ms-leaflet-map" zoomControl={true} scrollWheelZoom={true}>
             <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <FlyTo center={center} />
@@ -106,14 +126,30 @@ export default function MapSection() {
             ))}
           </MapContainer>
 
-          <div className="ms-map-btns">
-            <button type="button" className="ms-btn-locate" onClick={localizarme} disabled={localizando}>
-              {localizando ? 'Buscando…' : '📍 Localizarme'}
-            </button>
-            <button type="button" className="ms-btn-secondary">Usar el mapa</button>
-          </div>
-        </div>
+          {/* Modal al rechazar ubicación */}
+          {modalUbicacion && (
+            <div className="ms-modal-overlay">
+              <div className="ms-modal">
+                <p className="ms-modal-titulo">¿Dónde estás tú?</p>
+                <p className="ms-modal-texto">
+                  {permisoDenegado
+                    ? 'Bloqueaste el acceso a tu ubicación. Actívala desde los permisos del navegador e intenta de nuevo.'
+                    : 'Activa tu ubicación para ver las cafeterías más cercanas al instante. Sin datos guardados, sin sorpresas.'
+                  }
+                </p>
+                <div className="ms-modal-btns">
+                  {!permisoDenegado && (
+                    <button className="ms-modal-btn-primary" onClick={localizarme}>Localizame</button>
+                  )}
+                  <button className="ms-modal-btn-secondary" onClick={() => setModalUbicacion(false)}>Usar el mapa</button>
+                </div>
+              </div>
+            </div>
+          )}
 
+        </div>{/* fin ms-map-container */}
+
+        {/* Sidebar */}
         <aside className="ms-sidebar">
           <div className="ms-sidebar-header">
             <p className="ms-sidebar-title">Locales Cerca</p>
@@ -141,7 +177,8 @@ export default function MapSection() {
             )}
           </div>
         </aside>
-      </div>
+
+      </div>{/* fin ms-body */}
 
       {/* Mejor Valorados */}
       <div className="ms-mejor Maxwidth">
@@ -172,6 +209,7 @@ export default function MapSection() {
           ))}
         </div>
       </div>
+
     </section>
   )
 }
