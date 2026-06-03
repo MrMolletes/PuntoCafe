@@ -21,10 +21,74 @@ const cafeIcon = new L.Icon({
 })
 
 const CAFETERIAS_DEMO = [
-  { id:1, nombre:'Café Époque',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Un espacio acogedor dedicado a servir experiencias únicas.', rating:4.8, horario:'9:00 – 19:00', lat:22.2726, lng:-97.8359, foto:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&q=80' },
-  { id:2, nombre:'Zona Café',    ciudad:'Cd Madero, Tamaulipas', descripcion:'Relajate con los mejores granos en un ambiente sin igual.',  rating:4.5, horario:'8:00 – 18:00', lat:22.2698, lng:-97.8330, foto:'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=120&q=80' },
-  { id:3, nombre:'Cafe & Moka',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Robusta de altura cremada en la crema más fina.',           rating:4.1, horario:'7:00 – 17:00', lat:22.2748, lng:-97.8380, foto:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&q=80' },
-  { id:4, nombre:'Madero Cafe',  ciudad:'Cd Madero, Tamaulipas', descripcion:'Algo ligero, limón al fondo, caramelo claro al tono.',      rating:4.6, horario:'8:30 – 20:00', lat:22.2710, lng:-97.8345, foto:'https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=120&q=80' },
+  {
+    id: 1, nombre: 'Café Époque', ciudad: 'Cd Madero, Tamaulipas',
+    descripcion: 'Un espacio acogedor dedicado a servir experiencias únicas.',
+    rating: 4.8, horario: '9:00 – 19:00', lat: 22.3980, lng: -97.9270,
+    foto: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80',
+    direccion: 'Av. Hidalgo 120, Centro, Cd Madero',
+    telefono: '833 2XX XX78',
+    whatsapp: '833 2XX XX78',
+    reservaciones: true,
+    reservacionesUrl: null,
+    menu: [
+      { categoria: 'Bebidas Calientes', nombre: 'Cappuccino', descripcion: 'Espresso con leche vaporizada y espuma', precio: 55 },
+      { categoria: 'Bebidas Calientes', nombre: 'Americano', descripcion: 'Espresso doble con agua caliente', precio: 45 },
+      { categoria: 'Bebidas Frías',     nombre: 'Frappé de caramelo', descripcion: 'Café frío con caramelo y crema batida', precio: 70 },
+      { categoria: 'Comida',            nombre: 'Croissant de mantequilla', descripcion: 'Recién horneado, crujiente por fuera', precio: 40 },
+      { categoria: 'Postres',           nombre: 'Pay de queso', descripcion: 'Con base de galleta y mermelada de fresa', precio: 55 },
+    ]
+  },
+  {
+    id: 2, nombre: 'Zona Café', ciudad: 'Cd Madero, Tamaulipas',
+    descripcion: 'Relajate con los mejores granos en un ambiente sin igual.',
+    rating: 4.5, horario: '8:00 – 18:00', lat: 22.3050, lng: -97.8690,
+    foto: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&q=80',
+    direccion: 'Calle Juárez 45, Col. Centro, Cd Madero',
+    telefono: '833 2XX XX78',
+    whatsapp: null,
+    reservaciones: false,
+    reservacionesUrl: null,
+    menu: [
+      { categoria: 'Bebidas Calientes', nombre: 'Latte', descripcion: 'Espresso suave con leche cremosa', precio: 58 },
+      { categoria: 'Bebidas Frías',     nombre: 'Cold Brew', descripcion: 'Café extraído en frío por 12 horas', precio: 65 },
+      { categoria: 'Comida',            nombre: 'Sandwich de pavo', descripcion: 'Pan artesanal, pavo, lechuga y mostaza', precio: 75 },
+      { categoria: 'Postres',           nombre: 'Brownie', descripcion: 'Chocolate oscuro con nuez', precio: 45 },
+    ]
+  },
+  {
+    id: 3, nombre: 'Cafe & Moka', ciudad: 'Cd Madero, Tamaulipas',
+    descripcion: 'Robusta de altura cremada en la crema más fina.',
+    rating: 4.1, horario: '7:00 – 17:00', lat: 22.2550, lng: -97.8680,
+    foto: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80',
+    direccion: 'Blvd. Morelos 890, Cd Madero',
+    telefono: null,
+    whatsapp: '833 2XX XX78',
+    reservaciones: false,
+    reservacionesUrl: null,
+    menu: [
+      { categoria: 'Bebidas Calientes', nombre: 'Moka', descripcion: 'Espresso con chocolate y leche', precio: 62 },
+      { categoria: 'Bebidas Calientes', nombre: 'Macchiato', descripcion: 'Espresso con toque de leche espumada', precio: 50 },
+      { categoria: 'Comida',            nombre: 'Bagel con cream cheese', descripcion: 'Tostado con queso crema y cebollín', precio: 55 },
+    ]
+  },
+  {
+    id: 4, nombre: 'Madero Cafe', ciudad: 'Cd Madero, Tamaulipas',
+    descripcion: 'Algo ligero, limón al fondo, caramelo claro al tono.',
+    rating: 4.6, horario: '8:30 – 20:00', lat: 22.2720, lng: -97.8340,
+    foto: 'https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=400&q=80',
+    direccion: 'Av. Tamaulipas 234, Cd Madero',
+    telefono: '833 2XX XX78',
+    whatsapp: null,
+    reservaciones: true,
+    reservacionesUrl: 'https://maderocafe.com/reservar',
+    menu: [
+      { categoria: 'Bebidas Calientes', nombre: 'Café de olla', descripcion: 'Canela y piloncillo, receta tradicional', precio: 35 },
+      { categoria: 'Bebidas Frías',     nombre: 'Limonada con café', descripcion: 'Café frío con limón fresco y menta', precio: 60 },
+      { categoria: 'Comida',            nombre: 'Molletes', descripcion: 'Pan bolillo con frijoles y queso gratinado', precio: 65 },
+      { categoria: 'Postres',           nombre: 'Pastel de zanahoria', descripcion: 'Con betún de queso crema', precio: 50 },
+    ]
+  },
 ]
 
 function FlyTo({ center }) {
@@ -42,11 +106,13 @@ export default function MapSection() {
   const [query, setQuery]                   = useState('')
   const [resultados, setResultados]         = useState(CAFETERIAS_DEMO)
   const [seleccionado, setSeleccionado]     = useState(null)
-  const [center, setCenter]                 = useState([22.2726, -97.8359])
+  const [center, setCenter]                 = useState([22.3113, -97.8609])
   const [localizando, setLocalizando]       = useState(false)
   const [modalUbicacion, setModalUbicacion] = useState(true)
   const [permisoDenegado, setPermisoDenegado] = useState(false)
   const [slideActivo, setSlideActivo]       = useState(0)
+  const [cafeModal, setCafeModal]           = useState(null)
+  const [tabActivo, setTabActivo]           = useState('menu')
   const markersRef                          = useRef({})
 
   const MEJORES = [...CAFETERIAS_DEMO].sort((a, b) => b.rating - a.rating)
@@ -85,13 +151,28 @@ export default function MapSection() {
     setTimeout(() => { const m = markersRef.current[cafe.id]; if (m) m.openPopup() }, 1300)
   }
 
+  const abrirModal = (cafe, e) => {
+    e.stopPropagation()
+    setCafeModal(cafe)
+    setTabActivo('menu')
+  }
+
+  // Agrupar menú por categoría
+  const agruparMenu = (menu) => {
+    return menu.reduce((acc, item) => {
+      if (!acc[item.categoria]) acc[item.categoria] = []
+      acc[item.categoria].push(item)
+      return acc
+    }, {})
+  }
+
   return (
     <section className="ms-section generalPad">
 
       {/* Título */}
       <div className="ms-titulo Maxwidth">
         <h2>Tu camino al <span className="specialColor">buen cafe</span></h2>
-        <div className="ms-underline" />
+        <div className="ms-underline-brown" />
       </div>
 
       {/* Cuerpo: mapa + sidebar */}
@@ -171,7 +252,7 @@ export default function MapSection() {
                       <span className="ms-card-horario">{cafe.horario}</span>
                     </div>
                   </div>
-                  <button className="ms-btn-mas" onClick={e => { e.stopPropagation(); irACafeteria(cafe) }}>Más</button>
+                  <button className="ms-btn-mas" onClick={e => abrirModal(cafe, e)}>Más</button>
                 </div>
               ))
             )}
@@ -183,7 +264,7 @@ export default function MapSection() {
       {/* Mejor Valorados */}
       <div className="ms-mejor Maxwidth">
         <p className="ms-mejor-title">Mejor <span className="specialColor">valorados</span></p>
-        <div className="ms-underline" />
+        <div className="ms-underline-brown" />
         <div className="ms-carrusel">
           <div className="ms-carrusel-track" style={{ transform: `translateX(calc(-${slideActivo} * (100% / 2 + 0.6rem)))` }}>
             {MEJORES.map(cafe => (
@@ -196,7 +277,7 @@ export default function MapSection() {
                   <p className="ms-mv-desc">{cafe.descripcion}</p>
                   <div className="ms-mv-footer">
                     <div className="ms-mv-rating"><Stars rating={cafe.rating} /><span>{cafe.rating}</span></div>
-                    <button className="ms-mv-btn" onClick={e => { e.stopPropagation(); irACafeteria(cafe) }}>Más</button>
+                    <button className="ms-mv-btn" onClick={e => abrirModal(cafe, e)}>Más</button>
                   </div>
                 </div>
               </div>
@@ -209,6 +290,101 @@ export default function MapSection() {
           ))}
         </div>
       </div>
+
+      {/* Modal detalle cafetería */}
+      {cafeModal && (
+        <div className="ms-detail-overlay" onClick={() => setCafeModal(null)}>
+          <div className="ms-detail-modal" onClick={e => e.stopPropagation()}>
+
+            {/* Foto header */}
+            <div className="ms-detail-hero">
+              <img src={cafeModal.foto} alt={cafeModal.nombre} />
+              <div className="ms-detail-hero-overlay" />
+              <button className="ms-detail-close" onClick={() => setCafeModal(null)}>✕</button>
+              <div className="ms-detail-hero-info">
+                <p className="ms-detail-nombre">{cafeModal.nombre}</p>
+                <p className="ms-detail-ciudad">{cafeModal.ciudad}</p>
+                <div className="ms-detail-rating">
+                  <Stars rating={cafeModal.rating} />
+                  <span>{cafeModal.rating}</span>
+                  <span className="ms-detail-horario">· {cafeModal.horario}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tabs */}
+            <div className="ms-detail-tabs">
+              <button className={`ms-detail-tab ${tabActivo === 'menu' ? 'ms-detail-tab--active' : ''}`} onClick={() => setTabActivo('menu')}>Menú</button>
+              <button className={`ms-detail-tab ${tabActivo === 'info' ? 'ms-detail-tab--active' : ''}`} onClick={() => setTabActivo('info')}>Info</button>
+            </div>
+
+            {/* Contenido */}
+            <div className="ms-detail-body">
+
+              {/* Tab Menú */}
+              {tabActivo === 'menu' && (
+                <div className="ms-detail-menu">
+                  {Object.entries(agruparMenu(cafeModal.menu)).map(([cat, items]) => (
+                    <div key={cat} className="ms-menu-categoria">
+                      <p className="ms-menu-cat-titulo">{cat}</p>
+                      {items.map((item, i) => (
+                        <div key={i} className="ms-menu-item">
+                          <div className="ms-menu-item-info">
+                            <p className="ms-menu-item-nombre">{item.nombre}</p>
+                            <p className="ms-menu-item-desc">{item.descripcion}</p>
+                          </div>
+                          <span className="ms-menu-item-precio">${item.precio}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Tab Info */}
+              {tabActivo === 'info' && (
+                <div className="ms-detail-info">
+                  {cafeModal.direccion && (
+                    <div className="ms-info-row">
+                      <span className="ms-info-icon">📍</span>
+                      <span>{cafeModal.direccion}</span>
+                    </div>
+                  )}
+                  {cafeModal.horario && (
+                    <div className="ms-info-row">
+                      <span className="ms-info-icon">🕐</span>
+                      <span>{cafeModal.horario}</span>
+                    </div>
+                  )}
+                  {cafeModal.telefono && (
+                    <div className="ms-info-row">
+                      <span className="ms-info-icon">📞</span>
+                      <a href={`tel:${cafeModal.telefono}`}>{cafeModal.telefono}</a>
+                    </div>
+                  )}
+                  {cafeModal.whatsapp && (
+                    <div className="ms-info-row">
+                      <span className="ms-info-icon">💬</span>
+                      <a href={`https://wa.me/52${cafeModal.whatsapp}`} target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+                    </div>
+                  )}
+                  {cafeModal.reservaciones && (
+                    <div className="ms-info-reserva">
+                      <p className="ms-info-reserva-txt">Este lugar acepta reservaciones</p>
+                      {cafeModal.reservacionesUrl ? (
+                        <a href={cafeModal.reservacionesUrl} target="_blank" rel="noreferrer" className="ms-info-reserva-btn">Reservar en línea</a>
+                      ) : (
+                        <a href={`tel:${cafeModal.telefono || cafeModal.whatsapp}`} className="ms-info-reserva-btn">Llamar para reservar</a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
+            </div>
+          </div>
+        </div>
+      )}
 
     </section>
   )

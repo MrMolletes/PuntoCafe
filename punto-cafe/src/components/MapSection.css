@@ -16,13 +16,21 @@
 .ms-titulo h2 {
   font-size: 2.2rem;
   font-weight: 900;
-  color: var(--brown);
+  color: #E33900;
   margin: 0;
 }
 .ms-underline {
   width: 5rem;
   height: 0.22rem;
   background: var(--cta);
+  border-radius: 99px;
+  margin-top: 0.4rem;
+}
+
+.ms-underline-brown {
+  width: 5rem;
+  height: 0.22rem;
+  background: #4B2901;
   border-radius: 99px;
   margin-top: 0.4rem;
 }
@@ -340,7 +348,7 @@
 .ms-mejor-title {
   font-size: 1.6rem;
   font-weight: 900;
-  color: var(--brown);
+  color: #E33900;
   margin: 0;
 }
 
@@ -495,3 +503,227 @@
     font-size: 1.7rem;
   }
 }
+/* ═══════════════════════════════════════════════════════
+   MODAL DETALLE CAFETERÍA
+   ═══════════════════════════════════════════════════════ */
+
+.ms-detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: ms-fade-in 0.2s ease;
+}
+@keyframes ms-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.ms-detail-modal {
+  background: #fff;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 32rem;
+  max-height: 88vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  animation: ms-modal-in 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Hero */
+.ms-detail-hero {
+  position: relative;
+  height: 13rem;
+  flex-shrink: 0;
+}
+.ms-detail-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ms-detail-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 30%, rgba(20,5,0,0.85) 100%);
+}
+.ms-detail-close {
+  position: absolute !important;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2.2rem !important;
+  height: 2.2rem !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.9) !important;
+  border: none !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #333 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 0 !important;
+}
+.ms-detail-close:hover {
+  background: #fff !important;
+}
+.ms-detail-hero-info {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  color: #fff;
+}
+.ms-detail-nombre {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0 0 0.15rem;
+}
+.ms-detail-ciudad {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cta);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.35rem;
+}
+.ms-detail-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+.ms-detail-rating .ms-stars { color: var(--cta); font-size: 0.85rem; }
+.ms-detail-rating span { font-weight: 700; }
+.ms-detail-horario { color: rgba(255,255,255,0.7); font-weight: 400; }
+
+/* Tabs */
+.ms-detail-tabs {
+  display: flex;
+  border-bottom: 2px solid rgba(0,0,0,0.07);
+  flex-shrink: 0;
+}
+.ms-detail-tab {
+  flex: 1;
+  padding: 0.85rem 0 !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  color: rgba(0,0,0,0.45) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2.5px solid transparent !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: auto !important;
+  margin-bottom: -2px;
+}
+.ms-detail-tab--active {
+  color: #E33900 !important;
+  border-bottom-color: #E33900 !important;
+}
+
+/* Body scrollable */
+.ms-detail-body {
+  overflow-y: auto;
+  flex: 1;
+  padding: 1.25rem;
+}
+
+/* Menú */
+.ms-menu-categoria {
+  margin-bottom: 1.5rem;
+}
+.ms-menu-cat-titulo {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #E33900;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.ms-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.ms-menu-item:last-child { border-bottom: none; }
+.ms-menu-item-info { flex: 1; }
+.ms-menu-item-nombre {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin: 0 0 0.18rem;
+}
+.ms-menu-item-desc {
+  font-size: 0.78rem;
+  color: rgba(0,0,0,0.5);
+  margin: 0;
+  line-height: 1.4;
+}
+.ms-menu-item-precio {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #E33900;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Info */
+.ms-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.ms-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.7);
+}
+.ms-info-icon { font-size: 1.1rem; flex-shrink: 0; }
+.ms-info-row a {
+  color: #E33900;
+  text-decoration: none;
+  font-weight: 600;
+}
+.ms-info-row a:hover { text-decoration: underline; }
+.ms-info-reserva {
+  margin-top: 0.5rem;
+  background: rgba(227,57,0,0.06);
+  border: 1.5px solid rgba(227,57,0,0.2);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.ms-info-reserva-txt {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin: 0;
+}
+.ms-info-reserva-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: #E33900;
+  color: #fff;
+  border-radius: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+}
+.ms-info-reserva-btn:hover { background: #c73100; }
